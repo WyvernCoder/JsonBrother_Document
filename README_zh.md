@@ -35,7 +35,7 @@ LANGUAGE: [English](README.md), 简体中文
 
 **注意，你不能用数组对象去赋值其他的数组对象**
 
-![](DocumentResource\JsonHandler_Family.png)
+<img src="DocumentResource\JsonHandler_Family.png" style="zoom:80%;" />
 
 
 
@@ -45,7 +45,7 @@ LANGUAGE: [English](README.md), 简体中文
 
 这个节点会创建并发送 **POST** 类型的 HTTP Request，这个 Request 的 MIME 类型是 **Application/json; Charset="UTF8"**，当 URL 网站加载完毕了，**OnRequestCompletee** 这个委托就会被广播。
 
-![](DocumentResource\JsonSender_Family.png)
+<img src="DocumentResource\JsonSender_Family.png" style="zoom:80%;" />
 
 
 
