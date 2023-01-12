@@ -2,7 +2,50 @@
 
 LANGUAGE: English, [简体中文](README_zh.md)
 
-[TOC]
+
+
+- [JSON Data Brother](#json-data-brother)
+	- [INTRODUCE](#introduce)
+	- [SUMMARY](#summary)
+	- [JSON HANDLER](#json-handler)
+	- [JSON SENDER](#json-sender)
+	- [How does my PHP return data?](#how-does-my-php-return-data)
+			- [First, Create a blank php like this.](#first-create-a-blank-php-like-this)
+			- [Second, Type the php code like this](#second-type-the-php-code-like-this)
+			- [Third, Open your browser and open php page](#third-open-your-browser-and-open-php-page)
+			- [So, if we write this php in a more complex way...](#so-if-we-write-this-php-in-a-more-complex-way)
+	- [How to check my php return data in BP?](#how-to-check-my-php-return-data-in-bp)
+			- [First, Add a JsonSender ActorComponent to your Actor](#first-add-a-jsonsender-actorcomponent-to-your-actor)
+			- [Second, Create node like this](#second-create-node-like-this)
+			- [Third, Create a CustomEvent for the red "Event"](#third-create-a-customevent-for-the-red-event)
+			- [Fourth, Print the content](#fourth-print-the-content)
+			- [Fifth, Send JSON String to your php](#fifth-send-json-string-to-your-php)
+			- [Sixth, Place actor to your level](#sixth-place-actor-to-your-level)
+			- [Final, Play or Simulate](#final-play-or-simulate)
+	- [How to get Field Value？](#how-to-get-field-value)
+			- [First, deserialize your JSON String into JSON Object](#first-deserialize-your-json-string-into-json-object)
+			- [Second, use GetJsonValue node to get the value in the JSON Object](#second-use-getjsonvalue-node-to-get-the-value-in-the-json-object)
+			- [Third, use Break node to obtain the data in the structure](#third-use-break-node-to-obtain-the-data-in-the-structure)
+			- [Fourth, Print String](#fourth-print-string)
+			- [Final, Play or Simulate.](#final-play-or-simulate-1)
+	- [How to modify the Value of a Field?](#how-to-modify-the-value-of-a-field)
+			- [First, deserialize your JSON String into JSON Object.](#first-deserialize-your-json-string-into-json-object-1)
+			- [Second, create a SetJsonValue node and set it correctly](#second-create-a-setjsonvalue-node-and-set-it-correctly)
+			- [Third, create a structure for ValueStruct](#third-create-a-structure-for-valuestruct)
+			- [Fourth, enter a new value in the structure](#fourth-enter-a-new-value-in-the-structure)
+			- [Fifth, add a GetJsonValue node after the SetJsonValue node](#fifth-add-a-getjsonvalue-node-after-the-setjsonvalue-node)
+			- [Sixth, create the structure and Print the String in the structure as before](#sixth-create-the-structure-and-print-the-string-in-the-structure-as-before)
+			- [Final, Play or Simulate](#final-play-or-simulate-2)
+	- [How to modify the Value of Field in an array element?](#how-to-modify-the-value-of-field-in-an-array-element)
+			- [First, write a complex JSON String](#first-write-a-complex-json-string)
+			- [Second, get the Field of the array element and break the structure](#second-get-the-field-of-the-array-element-and-break-the-structure)
+			- [Third, get JSON Object in the array](#third-get-json-object-in-the-array)
+			- [Fourth, set the Value of Name Field to Lisa](#fourth-set-the-value-of-name-field-to-lisa)
+			- [Fifth, output the value of the Name Field in the first JsonObject in the StudentList array](#fifth-output-the-value-of-the-name-field-in-the-first-jsonobject-in-the-studentlist-array)
+			- [Sixth, connect JsonObject with the original JsonObject](#sixth-connect-jsonobject-with-the-original-jsonobject)
+			- [Final, Play or Simulate](#final-play-or-simulate-3)
+
+
 
 ## INTRODUCE
 

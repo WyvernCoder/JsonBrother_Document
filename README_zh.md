@@ -2,7 +2,51 @@
 
 LANGUAGE: [English](README.md), 简体中文
 
-[TOC]
+
+
+- [JSON Data Brother](#json-data-brother)
+	- [介绍](#介绍)
+	- [总结](#总结)
+	- [JSON HANDLER](#json-handler)
+	- [JSON SENDER](#json-sender)
+	- [如何让我的 PHP 返回数据？](#如何让我的-php-返回数据)
+			- [第一，像这样创建一个空白的 php 文件](#第一像这样创建一个空白的-php-文件)
+			- [第二，像这样输入 php 代码](#第二像这样输入-php-代码)
+			- [第三，启动浏览器并打开你的 php 页面](#第三启动浏览器并打开你的-php-页面)
+			- [所以，如果我们用更复杂的方式写这个 php ...](#所以如果我们用更复杂的方式写这个-php-)
+	- [如何在蓝图中查看 PHP 返回的数据？](#如何在蓝图中查看-php-返回的数据)
+			- [首先，为你的 Actor 添加一个 JsonSender 组件](#首先为你的-actor-添加一个-jsonsender-组件)
+			- [第二，像这样连接节点](#第二像这样连接节点)
+			- [第三，为红色的 "Event" 创建一个自定义事件](#第三为红色的-event-创建一个自定义事件)
+			- [第四，输出 Content](#第四输出-content)
+			- [第五，向你的 PHP 发送 JSON 数据](#第五向你的-php-发送-json-数据)
+			- [第六，把这个 Actor 摆放到关卡里](#第六把这个-actor-摆放到关卡里)
+			- [运行查看结果](#运行查看结果)
+	- [如何获取 JSON Field 的 Value？](#如何获取-json-field-的-value)
+			- [第一，将你的 JSON String 反序列化成 JSON Object](#第一将你的-json-string-反序列化成-json-object)
+			- [第二，使用 Get Json Value 节点以获取 JSON Object 中的数据](#第二使用-get-json-value-节点以获取-json-object-中的数据)
+			- [第三，使用 Break 节点获取结构体中的数据](#第三使用-break-节点获取结构体中的数据)
+			- [第四，将 String 打印出来](#第四将-string-打印出来)
+			- [最终，开始游戏](#最终开始游戏)
+	- [如何修改 JSON Field 的 Value？](#如何修改-json-field-的-value)
+			- [第一，将你的 JSON String 反序列化成 JSON Object。](#第一将你的-json-string-反序列化成-json-object-1)
+			- [第二，创建 Set Json Value 节点并正确设置](#第二创建-set-json-value-节点并正确设置)
+			- [第三，为 ValueStruct 创建结构体](#第三为-valuestruct-创建结构体)
+			- [第四，在结构体中输入新的 Value](#第四在结构体中输入新的-value)
+			- [第五，在 SetJsonValue 节点后面添加一个 GetJsonValue 节点](#第五在-setjsonvalue-节点后面添加一个-getjsonvalue-节点)
+			- [第六，像以前那样创建结构体并输出结构体中的 String](#第六像以前那样创建结构体并输出结构体中的-string)
+			- [最终，开始游戏后，就可以看到改变了](#最终开始游戏后就可以看到改变了)
+	- [如何修改数组元素里 Field 的 Value？](#如何修改数组元素里-field-的-value)
+			- [第一，编写一个较为复杂的 JSON String](#第一编写一个较为复杂的-json-string)
+			- [第二，获取数组元素的 Field 并创建结构体](#第二获取数组元素的-field-并创建结构体)
+			- [第三，获取 Array 中的 JSON Object](#第三获取-array-中的-json-object)
+			- [第四，设置 Name Field 的 Value 为 Lisa](#第四设置-name-field-的-value-为-lisa)
+			- [第五，输出 StudentList 数组中第一个 JsonObject 里的 Name Field 的 Value](#第五输出-studentlist-数组中第一个-jsonobject-里的-name-field-的-value)
+			- [第六，将 JsonObject 与最开始的 JsonObject相连](#第六将-jsonobject-与最开始的-jsonobject相连)
+			- [第七，开始游戏](#第七开始游戏)
+  
+
+
 
 ## 介绍
 
