@@ -177,3 +177,198 @@ echo "Shader makes me full of power!";
 #### 运行查看结果
 
  <img src="DocumentResource/image-20230111224800615.png" alt="image-20230111224800615" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## 如何获取 JSON Field 的 Value？
+
+#### 第一，将你的 JSON String 反序列化成 JSON Object
+
+你可以把 JSON String 的基础格式放在你的 PHP 服务器上用以动态更新它们。
+
+ <img src="DocumentResource/image-20230112102403092.png" alt="image-20230112102403092" style="zoom: 50%;" />
+
+
+
+#### 第二，使用 Get Json Value 节点以获取 JSON Object 中的数据
+
+这将会返回一个结构体用以正确获取 Type 枚举指向的类型。
+
+ <img src="DocumentResource/image-20230112102642244.png" alt="image-20230112102642244" style="zoom: 33%;" />
+
+
+
+#### 第三，使用 Break 节点获取结构体中的数据
+
+ <img src="DocumentResource/image-20230112102843348.png" alt="image-20230112102843348" style="zoom: 33%;" />
+
+
+
+你会得到这样一个结构体。
+
+ <img src="DocumentResource/image-20230112102906569.png" alt="image-20230112102906569" style="zoom:50%;" />
+
+
+
+结构体上的数据与 Get Json Value 节点的 Type 是一一对应的。
+
+ <img src="DocumentResource/image-20230112103031485.png" alt="image-20230112103031485" style="zoom: 33%;" />
+
+
+
+#### 第四，将 String 打印出来
+
+ <img src="DocumentResource/image-20230112103206575.png" alt="image-20230112103206575" style="zoom:50%;" />
+
+
+
+蓝图总览。
+
+ <img src="DocumentResource/image-20230112103233999.png" alt="image-20230112103233999" style="zoom:33%;" />
+
+
+
+#### 最终，开始游戏
+
+你可以发现，mode 的 Value 被打印出来了。
+
+ <img src="DocumentResource/image-20230112103356357.png" alt="image-20230112103356357" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## 如何修改 JSON Field 的 Value？
+
+#### 第一，将你的 JSON String 反序列化成 JSON Object。
+
+ <img src="DocumentResource/image-20230112103608775.png" alt="image-20230112103608775" style="zoom:50%;" />
+
+
+
+#### 第二，创建 Set Json Value 节点并正确设置
+
+FieldType 变量是这个 Field 的类型，如果类型错误，将会 LOG ERROR。
+
+ <img src="DocumentResource/image-20230112103726356.png" alt="image-20230112103726356" style="zoom:50%;" />
+
+
+
+#### 第三，为 ValueStruct 创建结构体
+
+ <img src="DocumentResource/image-20230112103909778.png" alt="image-20230112103909778" style="zoom:50%;" />
+
+ <img src="DocumentResource/image-20230112103937584.png" alt="image-20230112103937584" style="zoom:50%;" />
+
+
+
+结构体中的数据与 FieldType 是一一对应的，**你不可以为数组 Field 设置其他数组**
+
+ <img src="DocumentResource/image-20230112104030287.png" alt="image-20230112104030287" style="zoom:50%;" />
+
+
+
+#### 第四，在结构体中输入新的 Value
+
+ <img src="DocumentResource/image-20230112104304778.png" alt="image-20230112104304778" style="zoom:50%;" />
+
+
+
+#### 第五，在 SetJsonValue 节点后面添加一个 GetJsonValue 节点
+
+ <img src="DocumentResource/image-20230112104414743.png" alt="image-20230112104414743" style="zoom:50%;" />
+
+
+
+#### 第六，像以前那样创建结构体并输出结构体中的 String
+
+ <img src="DocumentResource/image-20230112104514354.png" alt="image-20230112104514354" style="zoom: 33%;" />
+
+
+
+#### 最终，开始游戏后，就可以看到改变了
+
+**TESTTTT** 被修改成了 **You are clever!**
+
+ <img src="DocumentResource/image-20230112104644619.png" alt="image-20230112104644619" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## 如何修改数组元素里 Field 的 Value？
+
+#### 第一，编写一个较为复杂的 JSON String
+
+这个 JSON 拥有一个 StudentList 数组和两个元素，***每个元素都可以看作是一个 JSON Object***。
+
+我喜欢使用 **Make Literal String** 节点来整理复杂的 String 数据。
+
+ <img src="DocumentResource/image-20230112105056269.png" alt="image-20230112105056269" style="zoom:50%;" />
+
+```json
+{
+ "StudentList":
+ [
+   {
+    "Name":"Bob",
+    "Age":"18"
+   },
+   {
+    "Name":"Billy",
+    "Age":"19"
+   }
+ ]
+}
+```
+
+
+
+#### 第二，获取数组元素的 Field 并创建结构体
+
+ <img src="DocumentResource/image-20230112105647600.png" alt="image-20230112105647600" style="zoom:50%;" />
+
+
+
+#### 第三，获取 Array 中的 JSON Object
+
+ <img src="DocumentResource/image-20230112110019683.png" alt="image-20230112110019683" style="zoom:50%;" />
+
+
+
+#### 第四，设置 Name Field 的 Value 为 Lisa
+
+ <img src="DocumentResource/image-20230112123018474.png" alt="image-20230112123018474" style="zoom:50%;" />
+
+ 至此，我们就成功把 Bob 修改为 Lisa 了，接下来我们输出这个名字。
+
+
+
+#### 第五，输出 StudentList 数组中第一个 JsonObject 里的 Name Field 的 Value
+
+ <img src="DocumentResource/image-20230112124421392.png" alt="image-20230112124421392" style="zoom:50%;" />
+
+
+
+#### 第六，将 JsonObject 与最开始的 JsonObject相连
+
+Set Json Value 节点的返回值仍然是数组的元素，所以我们需要将 JsonObject 连接到最初的 JsonObject Root。
+
+![image-20230112124654331](DocumentResource/image-20230112124654331.png)
+
+
+
+#### 第七，开始游戏
+
+可以看到，JsonObject 中的 Bob 被修改成了 Lisa。
+
+ <img src="DocumentResource/image-20230112125002968.png" alt="image-20230112125002968" style="zoom:50%;" />
+

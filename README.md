@@ -177,3 +177,201 @@ My php will return the value of the mode field. You can find the PHP code below.
 #### Final, Play or Simulate
 
  <img src="DocumentResource/image-20230111224800615.png" alt="image-20230111224800615" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## How to get Field Value？
+
+#### First, deserialize your JSON String into JSON Object
+
+You can put the basic format of JSON String on your PHP server to dynamically update them.
+
+ <img src="DocumentResource/image-20230112102403092.png" alt="image-20230112102403092" style="zoom: 50%;" />
+
+
+
+#### Second, use GetJsonValue node to get the value in the JSON Object
+
+This will return a structure to get the type pointed by the **Type** enumeration.
+
+ <img src="DocumentResource/image-20230112102642244.png" alt="image-20230112102642244" style="zoom: 33%;" />
+
+
+
+#### Third, use Break node to obtain the data in the structure
+
+ <img src="DocumentResource/image-20230112102843348.png" alt="image-20230112102843348" style="zoom: 33%;" />
+
+
+
+And you will get such a structure.
+
+ <img src="DocumentResource/image-20230112102906569.png" alt="image-20230112102906569" style="zoom:50%;" />
+
+
+
+The data on the structure corresponds **one-to-one** with the type of the GetJsonValue node.
+
+ <img src="DocumentResource/image-20230112103031485.png" alt="image-20230112103031485" style="zoom: 33%;" />
+
+
+
+#### Fourth, Print String
+
+ <img src="DocumentResource/image-20230112103206575.png" alt="image-20230112103206575" style="zoom:50%;" />
+
+
+
+Blueprint overview.
+
+ <img src="DocumentResource/image-20230112103233999.png" alt="image-20230112103233999" style="zoom:33%;" />
+
+
+
+#### Final, Play or Simulate.
+
+As you can see, the value of mode is printed.
+
+ <img src="DocumentResource/image-20230112103356357.png" alt="image-20230112103356357" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## How to modify the Value of a Field?
+
+#### First, deserialize your JSON String into JSON Object.
+
+ <img src="DocumentResource/image-20230112103608775.png" alt="image-20230112103608775" style="zoom:50%;" />
+
+
+
+#### Second, create a SetJsonValue node and set it correctly
+
+The **FieldType** variable is the type of this Field. If the type is wrong, it will LOG ERROR.
+
+ <img src="DocumentResource/image-20230112103726356.png" alt="image-20230112103726356" style="zoom:50%;" />
+
+
+
+#### Third, create a structure for ValueStruct
+
+ <img src="DocumentResource/image-20230112103909778.png" alt="image-20230112103909778" style="zoom:50%;" />
+
+ <img src="DocumentResource/image-20230112103937584.png" alt="image-20230112103937584" style="zoom:50%;" />
+
+
+
+The data in the structure is **one-to-one** corresponding to **FieldType**.
+
+**Set array value to other array object is not allowed.**
+
+ <img src="DocumentResource/image-20230112104030287.png" alt="image-20230112104030287" style="zoom:50%;" />
+
+
+
+#### Fourth, enter a new value in the structure
+
+ <img src="DocumentResource/image-20230112104304778.png" alt="image-20230112104304778" style="zoom:50%;" />
+
+
+
+#### Fifth, add a GetJsonValue node after the SetJsonValue node
+
+ <img src="DocumentResource/image-20230112104414743.png" alt="image-20230112104414743" style="zoom:50%;" />
+
+
+
+#### Sixth, create the structure and Print the String in the structure as before
+
+ <img src="DocumentResource/image-20230112104514354.png" alt="image-20230112104514354" style="zoom: 33%;" />
+
+
+
+#### Final, Play or Simulate
+
+**TESTTTT**  has been modified to **You are clear**.
+
+ <img src="DocumentResource/image-20230112104644619.png" alt="image-20230112104644619" style="zoom:50%;" />
+
+
+
+------
+
+
+
+## How to modify the Value of Field in an array element?
+
+#### First, write a complex JSON String
+
+This JSON has a **StudentList** array and two elements.
+
+***Each element can be regarded as a JSON Object***.
+
+I like to use the **Make Literal String** node to organize complex string data.
+
+ <img src="DocumentResource/image-20230112105056269.png" alt="image-20230112105056269" style="zoom:50%;" />
+
+```json
+{
+ "StudentList":
+ [
+   {
+    "Name":"Bob",
+    "Age":"18"
+   },
+   {
+    "Name":"Billy",
+    "Age":"19"
+   }
+ ]
+}
+```
+
+
+
+#### Second, get the Field of the array element and break the structure
+
+ <img src="DocumentResource/image-20230112105647600.png" alt="image-20230112105647600" style="zoom:50%;" />
+
+
+
+#### Third, get JSON Object in the array
+
+ <img src="DocumentResource/image-20230112110019683.png" alt="image-20230112110019683" style="zoom:50%;" />
+
+
+
+#### Fourth, set the Value of Name Field to Lisa
+
+ <img src="DocumentResource/image-20230112123018474.png" alt="image-20230112123018474" style="zoom:50%;" />
+
+ So far, we have successfully changed Bob to Lisa. Next we will print this Name Value.
+
+
+
+#### Fifth, output the value of the Name Field in the first JsonObject in the StudentList array
+
+ <img src="DocumentResource/image-20230112124421392.png" alt="image-20230112124421392" style="zoom:50%;" />
+
+
+
+#### Sixth, connect JsonObject with the original JsonObject
+
+The return value of the SetJsonValue node is an element of the array, so we need to connect the JsonObject to the original JsonObject Root.
+
+![image-20230112124654331](DocumentResource/image-20230112124654331.png)
+
+
+
+#### Final, Play or Simulate
+
+As you can see, Bob in JsonObject has been changed to Lisa.
+
+ <img src="DocumentResource/image-20230112125002968.png" alt="image-20230112125002968" style="zoom:50%;" />
